@@ -1,0 +1,26 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B29366BD-3FBA-4B18-8701-111127DE8AF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameStore.WebApi", "src\GameStore.WebApi\GameStore.WebApi.csproj", "{4FB06748-E5BA-4BF4-A3D0-6DE067C3682D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+			{4FB06748-E5BA-4BF4-A3D0-6DE067C3682D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+			{4FB06748-E5BA-4BF4-A3D0-6DE067C3682D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+			{4FB06748-E5BA-4BF4-A3D0-6DE067C3682D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+			{4FB06748-E5BA-4BF4-A3D0-6DE067C3682D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4FB06748-E5BA-4BF4-A3D0-6DE067C3682D} = {B29366BD-3FBA-4B18-8701-111127DE8AF9}
+	EndGlobalSection
+EndGlobal
