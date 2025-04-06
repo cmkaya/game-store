@@ -1,0 +1,7 @@
+@root_url = http://localhost:5277
+
+### GET all games
+GET {{root_url}}/games
+
+### GET a game by ID
+GET {{root_url}}/games/a5ab087b-99d4-4513-b9b9-b9e2ce4389bf
