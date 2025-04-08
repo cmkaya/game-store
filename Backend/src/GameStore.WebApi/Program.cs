@@ -49,6 +49,7 @@ app.MapPost("/games", (Game game) =>
   allGames.Add(game);
 
   return Results.CreatedAtRoute(GetGameByIdRoute, new { id = game.Id }, game);
-});
+})
+.WithParameterValidation();
 
 app.Run();

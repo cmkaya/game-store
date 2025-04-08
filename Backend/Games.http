@@ -12,7 +12,7 @@ Content-Type: application/json
 
 {
   "title": "Red Dead Redemption 2",
-  "genre": "Action-Adventure",
-  "price": 49.99,
+  "genre": "",
+  "price": 149.99,
   "releaseDate": "2018-10-26"
 }
