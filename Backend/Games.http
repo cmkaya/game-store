@@ -4,7 +4,7 @@
 GET {{root_url}}
 
 ### GET a game by ID
-GET {{root_url}}/cfd98d03-3770-4543-a0a9-090d19fbfaf1
+GET {{root_url}}/58833f19-2ab3-4790-bbe8-1199b6e7c753
 
 ### POST a new game
 POST {{root_url}}
@@ -15,4 +15,15 @@ Content-Type: application/json
   "genre": "",
   "price": 149.99,
   "releaseDate": "2018-10-26"
+}
+
+### PUT to update a game
+PUT {{root_url}}/58833f19-2ab3-4790-bbe8-1199b6e7c753
+Content-Type: application/json
+
+{
+  "title": "The Legend of Zelda: Breath of the Wild",
+  "genre": "Action-adventure",
+  "price": 19.99,
+  "releaseDate": "2017-03-03"
 }

@@ -52,4 +52,22 @@ app.MapPost("/games", (Game game) =>
 })
 .WithParameterValidation();
 
+app.MapPut("/games/{id:guid}", (Guid id, Game updatedGame) =>
+{
+  var existingGame = allGames.Find(game => game.Id == id);
+
+  if (existingGame is null)
+  {
+    return Results.NotFound();
+  }
+
+  existingGame.Title = updatedGame.Title;
+  existingGame.Genre = updatedGame.Genre;
+  existingGame.Price = updatedGame.Price;
+  existingGame.ReleaseDate = updatedGame.ReleaseDate;
+
+  return Results.NoContent();
+})
+.WithParameterValidation();
+
 app.Run();
