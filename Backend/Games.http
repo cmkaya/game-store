@@ -27,3 +27,6 @@ Content-Type: application/json
   "price": 19.99,
   "releaseDate": "2017-03-03"
 }
+
+### DELETE a game
+DELETE {{root_url}}/c11984ea-7674-4a7d-9987-272f769f2a42
