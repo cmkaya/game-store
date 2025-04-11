@@ -1,13 +1,14 @@
-@root_url = http://localhost:5277/games
+@root_url_games = http://localhost:5277/games
+@root_url_genres = http://localhost:5277/genres
 
 ### GET all games
-GET {{root_url}}
+GET {{root_url_games}}
 
 ### GET a game by ID
-GET {{root_url}}/58833f19-2ab3-4790-bbe8-1199b6e7c753
+GET {{root_url_games}}/13181f3f-f31d-44c3-99e9-fb6dec5f69fe
 
 ### POST a new game
-POST {{root_url}}
+POST {{root_url_games}}
 Content-Type: application/json
 
 {
@@ -18,7 +19,7 @@ Content-Type: application/json
 }
 
 ### PUT to update a game
-PUT {{root_url}}/58833f19-2ab3-4790-bbe8-1199b6e7c753
+PUT {{root_url_games}}/58833f19-2ab3-4790-bbe8-1199b6e7c753
 Content-Type: application/json
 
 {
@@ -29,4 +30,7 @@ Content-Type: application/json
 }
 
 ### DELETE a game
-DELETE {{root_url}}/c11984ea-7674-4a7d-9987-272f769f2a42
+DELETE {{{{root_url_games}}}}/c11984ea-7674-4a7d-9987-272f769f2a42
+
+### GET all genres
+GET {{root_url_genres}}

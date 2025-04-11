@@ -43,13 +43,30 @@ List<Game> allGames =
   }
 ];
 
-app.MapGet("/games", () => allGames);
+app.MapGet("/games", () => allGames.Select(game =>
+  new GameSummaryDto(
+  game.Id,
+  game.Title,
+  game.Genre.Name,
+  game.Price,
+  game.ReleaseDate
+  )
+));
 
 app.MapGet("/games/{id:guid}", (Guid id) =>
 {
   var game = allGames.Find(g => g.Id == id);
 
-  return game is null ? Results.NotFound() : Results.Ok(game);
+  return game is null ? Results.NotFound() : Results.Ok(
+    new GameDetailsDto(
+      game.Id,
+      game.Title,
+      game.Genre.Id,
+      game.Price,
+      game.ReleaseDate,
+      game.Description
+    )
+  );
 })
 .WithName(GetGameByIdRoute);
 
@@ -87,4 +104,28 @@ app.MapDelete("/games/{id:guid}", (Guid id) =>
   return Results.NoContent();
 });
 
+app.MapGet("/genres", () => allGenres.Select(genre => new GenreDto(
+  genre.Id,
+  genre.Name
+)));
+
 app.Run();
+
+public record GameDetailsDto(
+  Guid Id,
+  string Title,
+  Guid GenreId,
+  decimal Price,
+  DateOnly ReleaseDate,
+  string Description
+);
+
+public record GameSummaryDto(
+  Guid Id,
+  string Title,
+  string Genre,
+  decimal Price,
+  DateOnly ReleaseDate
+);
+
+public record GenreDto(Guid Id, string Name);
