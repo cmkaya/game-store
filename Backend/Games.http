@@ -5,7 +5,7 @@
 GET {{root_url_games}}
 
 ### GET a game by ID
-GET {{root_url_games}}/13181f3f-f31d-44c3-99e9-fb6dec5f69fe
+GET {{root_url_games}}/54d79e44-dd5c-4602-abb7-a8ae1f0f10b2
 
 ### POST a new game
 POST {{root_url_games}}
@@ -13,9 +13,10 @@ Content-Type: application/json
 
 {
   "title": "Red Dead Redemption 2",
-  "genre": "",
-  "price": 149.99,
-  "releaseDate": "2018-10-26"
+  "genreId": "e5ed74f7-68be-4039-b1c3-a059e431c894",
+  "price": 49.99,
+  "releaseDate": "2018-10-26",
+  "description": "An epic tale of life in America’s unforgiving heartland."
 }
 
 ### PUT to update a game
