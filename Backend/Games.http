@@ -5,7 +5,7 @@
 GET {{root_url_games}}
 
 ### GET a game by ID
-GET {{root_url_games}}/54d79e44-dd5c-4602-abb7-a8ae1f0f10b2
+GET {{root_url_games}}/84a046ac-d3ac-4c52-83d4-566d768b30e9
 
 ### POST a new game
 POST {{root_url_games}}
@@ -20,14 +20,15 @@ Content-Type: application/json
 }
 
 ### PUT to update a game
-PUT {{root_url_games}}/58833f19-2ab3-4790-bbe8-1199b6e7c753
+PUT {{root_url_games}}/84a046ac-d3ac-4c52-83d4-566d768b30e9
 Content-Type: application/json
 
 {
-  "title": "The Legend of Zelda: Breath of the Wild",
-  "genre": "Action-adventure",
-  "price": 19.99,
-  "releaseDate": "2017-03-03"
+  "title": "Knight Online",
+  "genreId": "12b399b2-efba-43e3-97cb-de7f162f4be8",
+  "price": 0.99,
+  "releaseDate": "2002-01-01",
+  "description": "A free-to-play fantasy MMORPG."
 }
 
 ### DELETE a game
