@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using GameStore.WebApi.Data;
 using GameStore.WebApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,75 +7,37 @@ var app = builder.Build();
 
 const string GetGameByIdRoute = "GetGameById";
 
-List<Genre> allGenres =
-[
-  new Genre { Id = Guid.NewGuid(), Name = "Action-adventure" },
-  new Genre { Id = Guid.NewGuid(), Name = "Platformer" },
-  new Genre { Id = Guid.NewGuid(), Name = "Action RPG" },
-];
+GameStoreData data = new();
 
-List<Game> allGames =
-[
-  new Game
-  {
-    Id = Guid.NewGuid(),
-    Title = "The Legend of Zelda: Breath of the Wild",
-    Genre = allGenres[0],
-    Price = 59.99m,
-    ReleaseDate = new DateOnly(2017, 3, 3),
-    Description = "An open-world action-adventure game set in the vast kingdom of Hyrule."
-  },
-  new Game
-  {
-    Id = Guid.NewGuid(),
-    Title = "Super Mario Odyssey",
-    Genre = allGenres[1],
-    Price = 59.99m,
-    ReleaseDate = new DateOnly(2017, 10, 27),
-    Description = "A 3D platformer where Mario travels across various kingdoms to rescue Princess Peach."
-  },
-  new Game
-  {
-    Id = Guid.NewGuid(),
-    Title = "The Witcher 3: Wild Hunt",
-    Genre = allGenres[2],
-    Price = 39.99m,
-    ReleaseDate = new DateOnly(2015, 5, 19),
-    Description = "An open-world RPG where players control Geralt of Rivia, a monster hunter, in a richly detailed fantasy world."
-  }
-];
-
-app.MapGet("/games", () => allGames.Select(game =>
-  new GameSummaryDto(
-  game.Id,
-  game.Title,
-  game.Genre.Name,
-  game.Price,
-  game.ReleaseDate
-  )
-));
+app.MapGet("/games", () =>
+  data.GetGames().Select(game => new GameSummaryDto(
+    game.Id,
+    game.Title,
+    game.Genre.Name,
+    game.Price,
+    game.ReleaseDate
+  ))
+);
 
 app.MapGet("/games/{id:guid}", (Guid id) =>
 {
-  var game = allGames.Find(g => g.Id == id);
+  var game = data.GetGame(id);
 
-  return game is null ? Results.NotFound() : Results.Ok(
-    new GameDetailsDto(
+  return game is null
+    ? Results.NotFound()
+    : Results.Ok(new GameDetailsDto(
       game.Id,
       game.Title,
       game.Genre.Id,
       game.Price,
       game.ReleaseDate,
       game.Description
-    )
-  );
-})
-.WithName(GetGameByIdRoute);
+    ));
+}).WithName(GetGameByIdRoute);
 
 app.MapPost("/games", (CreateGameDto gameDto) =>
 {
-  var genre = allGenres.Find(genre => genre.Id == gameDto.GenreId);
-
+  var genre = data.GetGenre(gameDto.GenreId);
   if (genre is null)
   {
     return Results.BadRequest("Invalid genre Id.");
@@ -82,7 +45,6 @@ app.MapPost("/games", (CreateGameDto gameDto) =>
 
   var game = new Game
   {
-    Id = Guid.NewGuid(),
     Title = gameDto.Title,
     Genre = genre,
     Price = gameDto.Price,
@@ -90,7 +52,7 @@ app.MapPost("/games", (CreateGameDto gameDto) =>
     Description = gameDto.Description
   };
 
-  allGames.Add(game);
+  data.AddGame(game);
 
   return Results.CreatedAtRoute(GetGameByIdRoute, new { id = game.Id }, new GameDetailsDto(
     game.Id,
@@ -100,23 +62,20 @@ app.MapPost("/games", (CreateGameDto gameDto) =>
     game.ReleaseDate,
     game.Description
   ));
-})
-.WithParameterValidation();
+}).WithParameterValidation();
 
 app.MapPut("/games/{id:guid}", (Guid id, UpdateGameDto gameDto) =>
 {
-  var genre = allGenres.Find(genre => genre.Id == gameDto.GenreId);
-
-  if (genre is null)
-  {
-    return Results.BadRequest("Invalid genre Id.");
-  }
-
-  var existingGame = allGames.Find(game => game.Id == id);
-
+  var existingGame = data.GetGame(id);
   if (existingGame is null)
   {
     return Results.NotFound();
+  }
+
+  var genre = data.GetGenre(gameDto.GenreId);
+  if (genre is null)
+  {
+    return Results.BadRequest("Invalid genre Id.");
   }
 
   existingGame.Title = gameDto.Title;
@@ -126,20 +85,18 @@ app.MapPut("/games/{id:guid}", (Guid id, UpdateGameDto gameDto) =>
   existingGame.Description = gameDto.Description;
 
   return Results.NoContent();
-})
-.WithParameterValidation();
+}).WithParameterValidation();
 
 app.MapDelete("/games/{id:guid}", (Guid id) =>
 {
-  allGames.RemoveAll(game => game.Id == id);
+  data.RemoveGame(id);
 
   return Results.NoContent();
 });
 
-app.MapGet("/genres", () => allGenres.Select(genre => new GenreDto(
-  genre.Id,
-  genre.Name
-)));
+app.MapGet("/genres", () =>
+  data.GetGenres().Select(genre => new GenreDto(genre.Id, genre.Name))
+);
 
 app.Run();
 
@@ -161,7 +118,9 @@ public record GameSummaryDto(
 );
 
 public record CreateGameDto(
-  [Required][StringLength(50, MinimumLength = 3)] string Title,
+  [Required]
+  [StringLength(50, MinimumLength = 3)]
+  string Title,
   Guid GenreId,
   [Range(0.01, 100.00)] decimal Price,
   DateOnly ReleaseDate,
@@ -169,7 +128,9 @@ public record CreateGameDto(
 );
 
 public record UpdateGameDto(
-  [Required][StringLength(50, MinimumLength = 3)] string Title,
+  [Required]
+  [StringLength(50, MinimumLength = 3)]
+  string Title,
   Guid GenreId,
   [Range(0.01, 100.00)] decimal Price,
   DateOnly ReleaseDate,
