@@ -5,7 +5,7 @@
 GET {{root_url_games}}
 
 ### GET a game by ID
-GET {{root_url_games}}/de91ef94-fe59-4f62-b8a3-1025aabec3bc
+GET {{root_url_games}}/4f8bae62-4ac9-44bc-820a-a454d78378fe
 
 ### POST a new game
 POST {{root_url_games}}
