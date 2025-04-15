@@ -5,34 +5,34 @@
 GET {{root_url_games}}
 
 ### GET a game by ID
-GET {{root_url_games}}/4f8bae62-4ac9-44bc-820a-a454d78378fe
+GET {{root_url_games}}/e358b183-7b33-40ab-9d9e-09799f83f3db
 
 ### POST a new game
 POST {{root_url_games}}
 Content-Type: application/json
 
 {
-  "title": "Red Dead Redemption 22",
-  "genreId": "bb553af0-8832-42ae-8e72-c915efbf084d",
-  "price": 39.99,
+  "title": "Knight Online",
+  "genreId": "3e37bf3b-66f4-4461-b9a4-8a71a3407424",
+  "price": 9.99,
   "releaseDate": "2018-10-26",
   "description": "An epic tale of life in America’s unforgiving heartland."
 }
 
 ### PUT to update a game
-PUT {{root_url_games}}/7b6d821f-96a9-41ee-9c74-49eb35343493
+PUT {{root_url_games}}/e5ac33cd-6e08-4aeb-84b6-d187ed5099c3
 Content-Type: application/json
 
 {
   "title": "Knight Online",
-  "genreId": "f063099a-aa4f-463b-80d2-14173ead95a8",
-  "price": 1.99,
+  "genreId": "3e37bf3b-66f4-4461-b9a4-8a71a3407424",
+  "price": 21.99,
   "releaseDate": "2002-01-01",
   "description": "A free-to-play fantasy MMORPG."
 }
 
 ### DELETE a game
-DELETE {{root_url_games}}/2c913a52-68a5-4dbb-8b3a-8211a7f760f5
+DELETE {{root_url_games}}/e358b183-7b33-40ab-9d9e-09799f83f3db
 
 ### GET all genres
 GET {{root_url_genres}}
