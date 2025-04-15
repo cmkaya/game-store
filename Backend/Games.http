@@ -32,7 +32,7 @@ Content-Type: application/json
 }
 
 ### DELETE a game
-DELETE {{root_url_games}}/e358b183-7b33-40ab-9d9e-09799f83f3db
+DELETE {{root_url_games}}/45959751-5dcd-4d61-a37f-156b562b316f
 
 ### GET all genres
 GET {{root_url_genres}}
