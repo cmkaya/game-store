@@ -1,4 +1,5 @@
 using GameStore.WebApi.Data;
+using GameStore.WebApi.Features.Games.DeleteGame;
 using GameStore.WebApi.Features.Games.GetGame;
 using GameStore.WebApi.Features.Games.GetGames;
 using GameStore.WebApi.Features.Games.PostGame;
@@ -13,13 +14,7 @@ app.MapGetGames(data);
 app.MapGetGame(data);
 app.MapUpdateGame(data);
 app.MapPostGame(data);
-
-app.MapDelete("/games/{id:guid}", (Guid id) =>
-{
-  data.RemoveGame(id);
-
-  return Results.NoContent();
-});
+app.MapDeleteGame(data);
 
 app.MapGet("/genres", () =>
   data.GetGenres().Select(genre => new GenreDto(genre.Id, genre.Name))
