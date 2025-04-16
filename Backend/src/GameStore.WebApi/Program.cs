@@ -9,6 +9,6 @@ GameStoreData data = new();
 
 app.MapGames(data);
 
-app.MapGetGenres(data);
+app.MapGenres(data);
 
 app.Run();
