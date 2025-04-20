@@ -1,12 +1,12 @@
 using GameStore.WebApi.Data;
 
-namespace GameStore.WebApi.Features.Games.UpdateGames;
+namespace GameStore.WebApi.Features.Games.UpdateGame;
 
 public static class UpdateGameEndpoint
 {
-  public static void MapUpdateGame(this IEndpointRouteBuilder app, GameStoreData data)
+  public static void MapUpdateGame(this IEndpointRouteBuilder app)
   {
-    app.MapPut("/{id:guid}", (Guid id, UpdateGameDto gameDto) =>
+    app.MapPut("/{id:guid}", (Guid id, UpdateGameDto gameDto, GameStoreData data) =>
     {
       var existingGame = data.GetGame(id);
       if (existingGame is null)
