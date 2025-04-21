@@ -19,6 +19,7 @@ public static class PostGameEndpoint
       var game = new Game()
       {
         Title = gameDto.Title,
+        GenreId = gameDto.GenreId,
         Genre = genre,
         Price = gameDto.Price,
         ReleaseDate = gameDto.ReleaseDate,

@@ -10,7 +10,7 @@ public static class GetGamesEndpoint
       data.GetGames().Select(game => new GameSummaryDto(
         game.Id,
         game.Title,
-        game.Genre.Name,
+        game.Genre!.Name,
         game.Price,
         game.ReleaseDate
       ))

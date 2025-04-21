@@ -16,7 +16,7 @@ public static class GetGameEndpoint
         : Results.Ok(new GameDetailsDto(
           game.Id,
           game.Title,
-          game.Genre.Id,
+          game.GenreId,
           game.Price,
           game.ReleaseDate,
           game.Description

@@ -14,13 +14,14 @@ public static class UpdateGameEndpoint
         return Results.NotFound();
       }
 
-      var genre = data.GetGenre(existingGame.Genre.Id);
+      var genre = data.GetGenre(existingGame.GenreId);
       if (genre is null)
       {
         return Results.BadRequest("Invalid genre Id.");
       }
 
       existingGame.Title = gameDto.Title;
+      existingGame.GenreId = gameDto.GenreId;
       existingGame.Genre = genre;
       existingGame.Price = gameDto.Price;
       existingGame.ReleaseDate = gameDto.ReleaseDate;

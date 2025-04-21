@@ -6,9 +6,9 @@ public class GameStoreData
 {
   private readonly List<Genre> _allGenres =
   [
-    new Genre { Id = new Guid("c8d4c053-3d73-4d83-8d6a-c9b0348a7d6c"), Name = "Action-adventure" },
-    new Genre { Id = new Guid("15726e7b-6c2b-4d84-a779-9e53467a8ea9"), Name = "Platformer" },
-    new Genre { Id = new Guid("8c7279ae-bcd8-4c27-86c9-47b9529b2f8b"), Name = "Action RPG" },
+    new() { Id = new Guid("c8d4c053-3d73-4d83-8d6a-c9b0348a7d6c"), Name = "Action-adventure" },
+    new() { Id = new Guid("15726e7b-6c2b-4d84-a779-9e53467a8ea9"), Name = "Platformer" },
+    new() { Id = new Guid("8c7279ae-bcd8-4c27-86c9-47b9529b2f8b"), Name = "Action RPG" },
   ];
 
   private readonly List<Game> _allGames;
@@ -21,6 +21,7 @@ public class GameStoreData
       {
         Id = Guid.NewGuid(),
         Title = "The Legend of Zelda: Breath of the Wild",
+        GenreId = _allGenres[0].Id,
         Genre = _allGenres[0],
         Price = 59.99m,
         ReleaseDate = new DateOnly(2017, 3, 3),
@@ -30,6 +31,7 @@ public class GameStoreData
       {
         Id = Guid.NewGuid(),
         Title = "Super Mario Odyssey",
+        GenreId = _allGenres[1].Id,
         Genre = _allGenres[1],
         Price = 59.99m,
         ReleaseDate = new DateOnly(2017, 10, 27),
@@ -39,6 +41,7 @@ public class GameStoreData
       {
         Id = Guid.NewGuid(),
         Title = "The Witcher 3: Wild Hunt",
+        GenreId = _allGenres[2].Id,
         Genre = _allGenres[2],
         Price = 39.99m,
         ReleaseDate = new DateOnly(2015, 5, 19),
