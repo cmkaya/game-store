@@ -10,8 +10,6 @@ var connectionString = builder.Configuration.GetConnectionString(ConnectionStrin
                          $"Connection string '{ConnectionStringKey}' not found in configuration");
 
 builder.Services.AddSqlite<GameStoreContext>(connectionString);
-builder.Services.AddTransient<GameDataLogger>();
-builder.Services.AddSingleton<GameStoreData>();
 
 var app = builder.Build();
 
